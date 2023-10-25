@@ -73,18 +73,12 @@ const Schema = mongoose.Schema({
     }
 });
 
-Schema.path('Empemail').validate(async (Empemail) => {
+Schema.path('Empemail').validate(async function (Empemail) {
     const emailCount = await mongoose.models.list.countDocuments({ Empemail });
     return !emailCount;
 }, 'Empemail already exists');
 
-var user_Signup = module.exports = mongoose.model('list',Schema);
-
-module.exports.get = async (limit) => {
-    try {
-        const users = await user_Signup.find().limit(limit);
-        return users;
-    } catch (error) {
-        throw error;
-    }
+var user_Signup = module.exports = mongoose.model('list', Schema);
+module.exports.get = function (callback, limit) {
+    user_Signup.find(callback).limit(limit);
 };

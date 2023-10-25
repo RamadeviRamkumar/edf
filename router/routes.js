@@ -32,7 +32,7 @@ router.post('/signin',(req,res) => {
                     data: {
                         // firstName : req.body.firstName,
                         // lastName  : req.body.lastName,
-                        userName  : req.body.userName,
+                        Username  : req.body.Username,
                         // email     : req.body.email,
                         mobile    : req.body.mobile,
                         password  : enc
@@ -154,11 +154,11 @@ router.post('/signin',(req,res) => {
     
         try {
             await user.save();
-            res.status(201).json({
+            res.status(200).json({
                 message: 'New user signed up',
                 data: {
-                    Firstname    : req.body.Firstname,
-                    Lastname     : req.body.Lastname,
+                    Username    : req.body.Username,
+                    // Lastname     : req.body.Lastname,
                     Empid        : req.body.Empid,
                     EmpContactNo : req.body.EmpContactNo,
                     Empemail     : req.body.Empemail,
@@ -172,7 +172,7 @@ router.post('/signin',(req,res) => {
                     AccountNo    : req.body.AccountNo,
                     BankBranch   : req.body.BankBranch,
                     Salary       : req.body.Salary,   
-                   Password : enc,
+                   Password : req.body.Password,
                 },
             });
         } catch (err) {
@@ -182,17 +182,17 @@ router.post('/signin',(req,res) => {
             });
         }
     });
-var Controller = require('../Controller/Controller.js');
+var controller = require('../controller/controller.js');
 router.route('/users')
-.get(Controller.index)
+.get(controller.index)
 
 // router.route('/signup')
 //       .post(Controller.add);
 
 router.route('/users/:email')
-.get(Controller.view)
-.patch(Controller.update)
-.put(Controller.update)
-.delete(Controller.Delete);
+.get(controller.view)
+.patch(controller.update)
+.put(controller.update)
+.delete(controller.Delete);
 
 module.exports = router;

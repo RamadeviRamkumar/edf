@@ -1,4 +1,5 @@
-module.exports = { 'url' : 'mongodb://127.0.0.1:/EmployeeDetails',
+module.exports = { 'url' : 'mongodb+srv://ramdevcse25:rama@employeemanagementsyste.odfknmq.mongodb.net/EmployeeDetails',
+
 };
 PORT = 8000
 
