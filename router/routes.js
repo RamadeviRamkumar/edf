@@ -23,19 +23,18 @@ router.post('/signin',(req,res) => {
             var dec = cryptr.decrypt(user.password);
 //             console.log(req.body.password);
 //             console.log(req.body.password);
-            var enc = cryptr.encrypt(req.body.password);
+            var enc = cryptr.encrypt(req.body.Password);
             //  var dec = cryptr.decrypt(enc);
             user.save(function (err){
-            if (req.body.password === dec) {
+            if (req.body.Password === dec) {
                 return res.status(201).send({
                     message : "Signin Successfully",
                     data: {
-                        // firstName : req.body.firstName,
-                        // lastName  : req.body.lastName,
-                        Username  : req.body.Username,
-                        // email     : req.body.email,
+                        
+                        Empname  : req.body.Empname,
+                        Empemail     : req.body.Empemail,
                         mobile    : req.body.mobile,
-                        password  : enc
+                        Password  : enc
                     }
                 })
             }
@@ -50,7 +49,7 @@ router.post('/signin',(req,res) => {
     })    
     
 });
-// const emailCount = require('../model/models.js');
+const emailCount = require('../model/models.js');
 
     // router.post('/register',async (req,callback) => {
     //     // var cryptr = new Cryptr('Employee');
@@ -131,12 +130,12 @@ router.post('/signin',(req,res) => {
 
     const user_Signup = require('../model/models.js');
     router.post('/register', async (req, res) => {
-        var cryptr = new Cryptr('Guru');
+        var cryptr = new Cryptr('Employee');
         var enc = cryptr.encrypt(req.body.Password);
         var dec = cryptr.decrypt(enc);
     
         var user = new user_Signup();
-        user.Username = req.body.Username;
+        user.Empname = req.body.Empname;
         user.Empid = req.body.Empid;
     user.Empemail = req.body.Empemail;
     user.EmpContactNo = req.body.EmpContactNo;
@@ -157,8 +156,7 @@ router.post('/signin',(req,res) => {
             res.status(200).json({
                 message: 'New user signed up',
                 data: {
-                    Username    : req.body.Username,
-                    // Lastname     : req.body.Lastname,
+                    Empname    : req.body.Empname,
                     Empid        : req.body.Empid,
                     EmpContactNo : req.body.EmpContactNo,
                     Empemail     : req.body.Empemail,
@@ -182,17 +180,14 @@ router.post('/signin',(req,res) => {
             });
         }
     });
-var controller = require('../controller/controller.js');
+var Controller = require('../controller/controller.js');
 router.route('/users')
-.get(controller.index)
-
-// router.route('/signup')
-//       .post(Controller.add);
+.get(Controller.index)
 
 router.route('/users/:email')
-.get(controller.view)
-.patch(controller.update)
-.put(controller.update)
-.delete(controller.Delete);
+.get(Controller.view)
+.patch(Controller.update)
+.put(Controller.update)
+.delete(Controller.Delete);
 
 module.exports = router;
