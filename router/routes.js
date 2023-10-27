@@ -9,8 +9,6 @@ router.get('/api',function(req,res){
     });
 });
 
-
-
 router.post('/signin',(req,res) => {
     user_Signup.findOne({ email : req.body.email }, function(err,user){
         
@@ -21,10 +19,7 @@ router.post('/signin',(req,res) => {
         }
         else {
             var dec = cryptr.decrypt(user.password);
-//             console.log(req.body.password);
-//             console.log(req.body.password);
             var enc = cryptr.encrypt(req.body.Password);
-            //  var dec = cryptr.decrypt(enc);
             user.save(function (err){
             if (req.body.Password === dec) {
                 return res.status(201).send({
