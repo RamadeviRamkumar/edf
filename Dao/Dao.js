@@ -3,7 +3,7 @@ const user_Signup = require('../model/models.js');
 
 exports.Dao_index = async function (req, res) {
   try {
-    const users = await Signup.find();
+    const users = await user_Signup.find();
 
     if (users ) {
       res.json({
