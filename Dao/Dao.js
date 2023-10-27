@@ -3,26 +3,33 @@ const user_Signup = require('../model/models.js');
 
 exports.Dao_index = async function (req, res) {
   try {
-    const user = await user_Signup.get();
-    res.json({
-      status: "Success",
-      message: "Got user details Successfully",
-      data: user
-    });
+    const users = await Signup.find();
+
+    if (users ) {
+      res.json({
+        status: "Success",
+        message: "Got all user details Successfully",
+        data: users
+      });
+    } else {
+      res.json({
+        status: "Error",
+        message: "No users found"
+      });
+    }
   } catch (err) {
     res.json({
       status: "Error",
-      message: err
+      message: err.message
     });
   }
 };
-
 exports.Dao_view = async function (req, res) {
   try {
-    const user = await user_Signup.find({ email: req.params.email });
+    const users = await Signup.find({ Empemail: req.params.Empemail });
     res.json({
       message: "User Signup Details",
-      data: user
+      data: users
     });
   } catch (err) {
     res.send(err);
